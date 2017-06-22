@@ -15,7 +15,7 @@ resume: true
 resume-external: true
 resume-url: https://google.com/?q=my+resume
 
-url: https://koppl.in/indigo
+url: http://craigllangford.com
 # your url: http://USERNAME.github.io
 
 permalink: /:title/
@@ -33,13 +33,13 @@ disqus:
   categories: [blog, project] # only show disqus for posts that have these categories
 
 # if you don't have any of social below, comment the line
-facebook: myfacebook
-twitter: mytwitter
+# facebook: myfacebook
+# twitter: mytwitter
 # google: mygoogle
 # instagram: myinstagram
 # pinterest: mypinterest
-# linkedin: mylinkedin
-# youtube: myyoutube
+linkedin: mylinkedin
+youtube: myyoutube
 # spotify: myspotify
 github: mygithub
 # lastfm: mylastfm

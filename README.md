@@ -1,79 +1,65 @@
+<p align="center">
+    <h2 align="center">Indigo Minimalist Jekyll Template - <a href="http://sergiokopplin.github.io/indigo/">Demo</a> · <a href="https://travis-ci.org/sergiokopplin/indigo"><img src="https://camo.githubusercontent.com/5393485b732749b3499264168fa8af60166071e8/68747470733a2f2f7472617669732d63692e6f72672f73657267696f6b6f70706c696e2f696e6469676f2e7376673f6272616e63683d67682d7061676573" alt="Build Status" data-canonical-src="https://travis-ci.org/sergiokopplin/indigo.svg?branch=gh-pages" style="max-width:100%;"></a></h2>
+</p>
 
-# Alexa App Part 1 - Creating an Alexa Skill Kit Application
+<p align="center">This is a simple and minimalist template for Jekyll for those who likes to eat noodles.</p>
 
-Having just received an Amazon Echo I made the typical requests "Alexa, play X song," "Alexa, tell me the weather," "Alexa, what is the news for today?" Wondering the current price of Bitcoin, which has been shooting up over the past month, I asked my Echo "Alexa, what is the price of Bitcoin?" This was responded with "sorry, I can't help you with that." I was rather surprised as the Echo can handle any other currency conversion, which lead to my first idea for an Amazon Echo application - Crypto Price. This blog post and it's follow up [Alexa App Part 2 - AWS Lambda Function](LINK) are an overview of the steps needed to create your first Echo application.If you wish to dive straight in the source code is [here](https://github.com/CraigLangford/Crypto-Price)!
+***
 
-## Application Focus
+<p align="center">
+    <b><a href="README.md#what-has-inside">What has inside</a></b>
+    |
+    <b><a href="README.md#setup">Setup</a></b>
+    |
+    <b><a href="README.md#settings">Settings</a></b>
+    |
+    <b><a href="README.md#how-to">How to</a></b>
+</p>
 
-Looking through the Echo applications that already exists there can be seen to be quite a few Bitcoin price applications already. These appear to be sufficient to gather the Bitcoin Price in US Dollars by requesting something like "Alexa, load Bitcoin Price," however, they do not seem to support any other cryptocurrencies (for which there are hundreds) and are limited to very few currencies (I'm situated in England and the price in pounds would be much more useful).
+<p align="center">
+    <img src="https://raw.githubusercontent.com/sergiokopplin/indigo/gh-pages/assets/screen-shot.png" />
+</p>
 
-*Other Bitcoin Price Applications*
-<img src="images/other_bitcoin_apps.png" alt="Other Bitcoin Price Applications" width=600>
+## What has inside
 
-## Creating the Alexa Skill Kit Application
+- [Jekyll](https://jekyllrb.com/), [Sass](http://sass-lang.com/) ~[RSCSS](http://rscss.io/)~ and [SVG](https://www.w3.org/Graphics/SVG/)
+- Tests with [Travis](https://travis-ci.org/)
+- Google Speed: [98/100](https://developers.google.com/speed/pagespeed/insights/?url=http%3A%2F%2Fsergiokopplin.github.io%2Findigo%2F);
+- No JS. :sunglasses:
 
-To create an Alexa Skill Kit app you must first create an account at https://developer.amazon.com. Once logged in, click on the `Alexa` tab and click on `Add a New Skill`.
+## Setup
 
-*Creating a New Alexa Skill Kit Application*
-<img src="images/add_a_new_skill.png" alt="Creating a New Alexa Skill Kit Application" width=900>
+0. :star: to the project. :metal:
+2. Fork the project [Indigo](https://github.com/sergiokopplin/indigo/fork)
+3. Edit `_config.yml` with your data (check <a href="README.md#settings">settings</a> section)
+4. Write some posts :bowtie:
 
-### Skill Information Page
+If you want to test locally on your machine, do the following steps also:
 
-You should now be on the `Skill Information Page` of your Alexa Skill Kit Application! Here you can input the title, Crypto Price, as well as the invocation name, which is whatever you tell Alexa to load the price. Unfortunately, the same name cannot be used twice, so crypto price will not work. You'll have to come up with something creative for your app's invocation name! For mine I'll use awesome prices. There should be no need to change the remaining features. Keep them as below:
+1. Install [Jekyll](http://jekyllrb.com), [NodeJS](https://nodejs.org/) and [Bundler](http://bundler.io/).
+2. Clone the forked repo on your machine
+3. Enter the cloned folder via terminal and run `bundle install`
+4. Then run `bundle exec jekyll serve --config _config.yml,_config-dev.yml`
+5. Open it in your browser: `http://localhost:4000`
+6. Test your app with `bundle exec htmlproofer ./_site`
 
-* Skill Type: Custom Interaction Model
-* Title: Crypto Price
-* Invocation Name: **Your Own Unique Name**
-* Language: English
-* Audio Player: No
+## Settings
 
-*Input a Title and Come Up With a Unique Invocation Name*
-<img src="images/skill_information_page.png" alt="Skill Information Page" width=900>
+You must fill some informations on `_config.yml` to customize your site.
 
-### Skills Builder
+```
+name: John Doe
+bio: 'A Man who travels the world eating noodles'
+picture: 'assets/images/profile.jpg'
+...
 
-After clicking next you should be on the `Skills Builder Page`. From here you'll want to click on the new Beta interactive model which allows you to easily create your skill. Once entering the Skill Builder you should be on the dashboard.
+and lot of other options, like width, projects, pages, read-time, tags, related posts, animations, multiple-authors, etc.
+```
 
-**Be sure to click `Save` at the top often, otherwise all your progress will be lost!**
+## How To?
 
-The first thing you'll want to do is create a new Intent. An Intent is when the user has an Intention to do something. In this case it'll be to get the crypto price. Click on `Add+` on the intents and create a new intent called CryptoPriceIntent.
+Check the [FAQ](./FAQ.md) if you have any doubt or problem.
 
-*Create New Intent Called CryptoPriceIntent*
-<img src="images/create_new_intent.png" alt="Create Crypto Price Intent" width=900>
+---
 
-Here is where the real power of the Alexa Skill Kit App comes into play. You can easily add any sort of things a user might say so Alexa can easily decipher what is needed for your backend application. An example for our application would be something like "What is the price of Bitcoin in US dollars" In this utterance "Bitcoin" and "US dollars" can be interchanged with any other cryptocurrency and currency. These features are called "slots" in the Alexa Skills Kit App and are the key components the backend wants. To tell Alexa which word is a slot you simply put curly braces around the slot position. For example: 
-
-*"What is the price of Bitcoin in US Dollars"* becomes *"What is the price of {cryptocurrency} in {currency}"*
-
-Below are a list of different types of utterances I added which I expect the user might ask. Add all of these yourself and try adding any others you think a user might ask!
-
-*Possible Utterances*
-<img src="images/sample_utterances.png" alt="Sample Utterances" width=600>
-
-Now, the slots aren't much use if the Alexa Skill Kit doesn't know what to expect for these. Furthermore, having a list of expected results would allow the App to be much more accurate when a user requests a certain price. This is exactly what `Slot Types` are for. On the left side of the application click on `Add+` next to `Slot Types` to create a new slot for {cryptocurrencies} and click it again to create a new slot for {currency}.
-
-*Create Two New Slots*
-<img src="images/create_slot.png" alt="Adding Slots" width=600>
-
-You should have your two slots ({cryptocurrency} and {currency}). Go to the page for {cryptocurrency} and see you can insert any possible values for this slot. Let's insert some trending cryptocurrencies into our list. In addition we can include their respective 3 letter symbol in case the user wants to try asking something like "give me the price of BTC."
-
-* Bitcoin
-* BTC
-* Ripple
-* XRP
-* Ethereum
-* ETH
-* Litecoin
-* LTC
-* Monero
-* XMR
-
-*Possible Values for the {cryptocurrency} Slot*
-<img src="images/cryptocurrency_values.png" alt="Cryptocurrency Slots" width=600>
-
-Follow the same steps for the currency slot and include values such as US Dollars, USD, Canadian dollars, CAD, pounds, GBP, etc. Now go back to your CryptoPriceIntent and select the appropriate `Slot Type` for the {cryptocurrency} and {currency} slots.
-
-*Assign the Slots to the New Slot Types*
-<img src="images/slot_types.png" alt="Cryptocurrency Slots" width=900>
-
-Now you're done creating your Alexa Skill Kit Model! Now click `Save` and `Build` at the top to finish the process. The model should be completed after a few minutes!
+[MIT](http://kopplin.mit-license.org/) License © Sérgio Kopplin

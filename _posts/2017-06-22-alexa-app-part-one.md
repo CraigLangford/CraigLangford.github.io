@@ -1,7 +1,7 @@
 ---
-title: "Alexa App Part One Creating an Alexa Skill Kit Application"
+title: "Alexa App Part One: Creating an Alexa Skill Kit Application"
 layout: post
-date: 2017-06-23 22:48
+date: 2017-06-23 22:25
 image: /assets/images/markdown.jpg
 headerImage: false
 tag:
@@ -13,9 +13,6 @@ author: craiglangford
 description: How to build an Alexa Skill Kit Application
 # jemoji: '<img class="emoji" title=":ramen:" alt=":ramen:" src="https://assets.github.com/images/icons/emoji/unicode/1f35c.png" height="20" width="20" align="absmiddle">'
 ---
-
-# Alexa App Part 1 - Creating an Alexa Skill Kit Application
-
 Having just received an Amazon Echo I made the typical requests "Alexa, play X song," "Alexa, tell me the weather," "Alexa, what is the news for today?" Wondering the current price of Bitcoin, which has been shooting up over the past month, I asked my Echo "Alexa, what is the price of Bitcoin?" This was responded with "sorry, I can't help you with that." I was rather surprised as the Echo can handle any other currency conversion, which lead to my first idea for an Amazon Echo application - Crypto Price. This blog post and it's follow up [Alexa App Part 2 - AWS Lambda Function](LINK) are an overview of the steps needed to create your first Echo application.If you wish to dive straight in the source code is [here](https://github.com/CraigLangford/Crypto-Price)!
 
 ## Application Focus

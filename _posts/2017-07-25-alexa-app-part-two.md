@@ -11,7 +11,6 @@ tag:
 category: blog
 author: craiglangford
 description: How to build an AWS Lambda Function for an Amazon Alexa Application
-# jemoji: '<img class="emoji" title=":ramen:" alt=":ramen:" src="https://assets.github.com/images/icons/emoji/unicode/1f35c.png" height="20" width="20" align="absmiddle">'
 ---
 Having set up an Alexa Skill Kit application in the last section of this blog series [here](LINK TO OTHER POST) we can now start handling the logic to actually handle the request. This is handled by an AWS Lambda function which simply takes a json file and returns a json response which will be passed on to the user. This json interface allows any software language to be used for the Lambda function, and in this case we will be using Python.
 

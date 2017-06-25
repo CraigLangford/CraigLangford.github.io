@@ -69,6 +69,9 @@ width: normal
 # if you don't need projects, comment the *projects* configs below
 projects: true
 
+# Do you want to show posts dated in the future
+future: false
+
 # if you don't need "about" or "blog", comment them out below
 about: true
 blog: true

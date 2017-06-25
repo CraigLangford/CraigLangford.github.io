@@ -16,12 +16,11 @@ resume-external: true
 resume-url: https://google.com/?q=my+resume
 
 url: http://craigllangford.com
-# your url: http://USERNAME.github.io
 
 permalink: /:title/
 
 # To enable google analytics, supply your token below
-# analytics-google: 'UA-MYANALYTICS'
+analytics-google: 'UA-73331001-4'
 
 # To enable piwik tracking, supply your url & site ID below
 # analytics-piwik-url: 'piwik.my-host.com'

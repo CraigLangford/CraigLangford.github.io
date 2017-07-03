@@ -47,3 +47,9 @@ layout: page
 {% if site.disqus.categories contains page.category %}
     {% include disqus.html %}
 {% endif %}
+
+{% for js in page.javascript-scripts %}
+     <script type="text/javascript">
+         {% include {{ js }} %}
+     </script>
+ {% endfor %}

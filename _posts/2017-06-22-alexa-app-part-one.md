@@ -5,9 +5,9 @@ date: 2017-06-23 22:25
 image: /assets/images/markdown.jpg
 headerImage: false
 tag:
-- markdown
-- components
-- extra
+- alexa
+- skill-kit
+- voice recognition
 category: blog
 author: craiglangford
 description: How to build an Alexa Skill Kit Application
@@ -52,7 +52,7 @@ The first thing you'll want to do is create a new Intent. An Intent is when the 
 *Create New Intent Called CryptoPriceIntent*
 <img class="image" src="{{ site.url }}/assets/images/create_new_intent.png" alt="Create Crypto Price Intent">
 
-Here is where the real power of the Alexa Skill Kit App comes into play. You can easily add any sort of things a user might say so Alexa can easily decipher what is needed for your backend application. An example for our application would be something like "What is the price of Bitcoin in US dollars" In this utterance "Bitcoin" and "US dollars" can be interchanged with any other cryptocurrency and currency. These features are called "slots" in the Alexa Skills Kit App and are the key components the backend wants. To tell Alexa which word is a slot you simply put curly braces around the slot position. For example: 
+Here is where the real power of the Alexa Skill Kit App comes into play. You can easily add any sort of things a user might say so Alexa can easily decipher what is needed for your backend application. An example for our application would be something like "What is the price of Bitcoin in US dollars" In this utterance "Bitcoin" and "US dollars" can be interchanged with any other cryptocurrency and currency. These features are called "slots" in the Alexa Skills Kit App and are the key components the backend wants. To tell Alexa which word is a slot you simply put curly braces around the slot position. For example:
 
 *"What is the price of Bitcoin in US Dollars"* becomes *"What is the price of {cryptocurrency} in {currency}"*
 

@@ -1,13 +1,13 @@
 ---
 title: "Alexa App Part Two: AWS Lambda Function"
 layout: post
-date: 2017-07-25 08:13
+date: 2017-07-13 08:13
 image: /assets/images/markdown.jpg
 headerImage: false
 tag:
-- markdown
-- components
-- extra
+- amazon
+- lambda
+- serverless
 category: blog
 author: craiglangford
 description: How to build an AWS Lambda Function for an Amazon Alexa Application

@@ -1,6 +1,6 @@
 # main text of home
 name: Craig Langford
-bio: A back-end developer who enjoys cooking, travelling and music
+bio: An backend developer who enjoys cooking, travelling and music
 # twitter summary info
 description: A blog about technology and stuff related
 
@@ -13,7 +13,7 @@ picture: assets/images/profile.jpg
 # and specify source (external or local).
 resume: true
 resume-external: true
-resume-url: https://google.com/?q=my+resume
+resume-url: assets/documents/craig-langford-resume.pdf
 
 url: https://craigllangford.com
 

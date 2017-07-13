@@ -11,5 +11,5 @@ tag:
 category: project
 author: craiglangford
 description: A puzzle game in which you spin dots to connect them
-externalLink: www.puzzlespin.com
+externalLink: http://puzzlespin.com
 ---

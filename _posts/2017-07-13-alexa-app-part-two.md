@@ -12,11 +12,20 @@ category: blog
 author: craiglangford
 description: How to build an AWS Lambda Function for an Amazon Alexa Application
 ---
-Having set up an Alexa Skill Kit application in the last section of this blog series [here](LINK TO OTHER POST) we can now start handling the logic to actually handle the request. This is handled by an AWS Lambda function which simply takes a json file and returns a json response which will be passed on to the user. This json interface allows any software language to be used for the Lambda function, and in this case we will be using Python.
+Having set up an Alexa Skill Kit application in the last section of this blog
+series [here](/alexa-app-part-one/) we can now start handling the logic to
+actually handle the request. This is handled by an AWS Lambda function which
+simply takes a json file and returns a json response which will be passed on
+to the user. This json interface allows any software language to be used for
+the Lambda function, and in this case we will be using Python.
 
 ## Creating the Response
 
-From the documentation the incoming information is separated into the current event as well as the session information. Therfore we'll create our lambda app, cryptoprice.py and put our lambda function in it. Luckily for us the event and response can be passed as dictionary items so we don't have to worry about loading/dumping the json data.
+From the documentation the incoming information is separated into the current
+event as well as the session information. Therfore we'll create our lambda app,
+cryptoprice.py and put our lambda function in it. Luckily for us the event and
+response can be passed as dictionary items so we don't have to worry about
+loading/dumping the json data.
 
 *cryptoprice.py*
 
@@ -27,7 +36,10 @@ def crypto_price_lambda(event, session):
     return response
 ```
 
-Obviously this response gives the Alexa Skill Kit no information in how to respond to the user and it will raise an error if attempted. Let's look into the type of response the Alexa Skill Kit will accept. Here is a typical response from the documentation.
+Obviously this response gives the Alexa Skill Kit no information in how to
+respond to the user and it will raise an error if attempted. Let's look into
+the type of response the Alexa Skill Kit will accept. Here is a typical
+response from the documentation.
 
 *Alexa Skill Kit Request Format*
 ```
@@ -43,12 +55,16 @@ Obviously this response gives the Alexa Skill Kit no information in how to respo
             "type": "PlainText",
             "text": "This is the response the user will hear. Hello!"
         },
-        "shouldEndSession": True
+        "shouldEndSession": true
     }
 }
 ```
 
-The core response can be seen to contain the version and the response. Further the response is composed of the card, which is the card the user would see in their Alexa App, the output speech, which is what the user will hear, and whether to end the session or not. Now that we have this we can create a simple function which generates the boilerplate around our desired response.
+The core response can be seen to contain the version and the response. Further
+the response is composed of the card, which is the card the user would see in
+their Alexa App, the output speech, which is what the user will hear, and
+whether to end the session or not. Now that we have this we can create a simple
+function which generates the boilerplate around our desired response.
 
 *Lambda Function Plus Alexa Skill Kit Response Building Function*
 
@@ -85,11 +101,20 @@ def build_response(
 
 ```
 
-Great! Now we should have Alexa respond to any request and say "welcome to cryptoprice" to the user, however, this has no functionality based on the type of request the user makes. From [Alexa App Part 1 - Alexa Skills Kit Application](LINK) we found that all Alexa Skills Kit applications ship with four main request types, namely, the LaunchRequest, HelpIntent, StopIntent and CancelIntent. Furthermore, we added a new intent for our application, the CryptoPriceIntent which is where the core functionality of our application is launched.
+Great! Now we should have Alexa respond to any request and say "welcome to
+cryptoprice" to the user, however, this has no functionality based on the type
+of request the user makes. From
+[Alexa App Part 1 - Alexa Skills Kit Application](/alexa-app-part-one/) we
+found that all Alexa Skills Kit applications ship with four main request types,
+namely, the LaunchRequest, HelpIntent, StopIntent and CancelIntent.
+Furthermore, we added a new intent for our application, the CryptoPriceIntent
+which is where the core functionality of our application is launched.
 
 ## Interpreting the Request
 
-To understand what request the user has been created we must look into the structure of the request being passed to our Lambda function. From the documentation it looks something like below.
+To understand what request the user has been created we must look into the
+structure of the request being passed to our Lambda function. From the
+documentation it looks something like below.
 
 *Example Request Format*
 ```
@@ -102,7 +127,7 @@ To understand what request the user has been created we must look into the struc
         },
         "attributes": {},
         "user": {"userId": "31849190191"},
-        "new": True
+        "new": true
     },
     "request": {
         "type": "IntentRequest",
@@ -147,9 +172,19 @@ To understand what request the user has been created we must look into the struc
 
 ```
 
-Here we can see that again there is the version number and the request at the base level, however, the context is passed as well. This will come in useful later when we want to gather the user's country information to decide which currency to respond in. As there are two main request types, the LaunchRequest (when the app is launched) and IntentRequest (for the HelpIntent, CancelIntent, StopIntent and GetCryptoPriceIntent). We will update our lambda function to delegate based on this. For many of the responses we can simply respond with a message, once this is done our only task left is to handle the GetCryptoPriceIntent.
+Here we can see that again there is the version number and the request at the
+base level, however, the context is passed as well. This will come in useful
+later when we want to gather the user's country information to decide which
+currency to respond in. As there are two main request types, the LaunchRequest
+(when the app is launched) and IntentRequest (for the HelpIntent, CancelIntent,
+StopIntent and GetCryptoPriceIntent). We will update our lambda function to
+delegate based on this. For many of the responses we can simply respond with a
+message, once this is done our only task left is to handle the
+GetCryptoPriceIntent.
 
-Below it can be seen that depending on the case the title, response message and should end session information is updated. To keep things simple notice that the card message as well as the speech output are the same.
+Below it can be seen that depending on the case the title, response message and
+should end session information is updated. To keep things simple notice that
+the card message as well as the speech output are the same.
 
 *Delegating the Request Types*
 
@@ -191,7 +226,21 @@ def crypto_price_lambda(event, session):
 
 ## Handling the logic to gather the cryptoprice
 
-Our app can now respond nearly every type of response, except for the one we actually built the app for! This function will be taking the desired cryptocurrency, and if the user specified, the cryptocurrency and look up the price. Looking around http://cryptocompare.com/api it seems we can convert any cryptoprice to any world currency. This can be achieved by making a request to https://min-api.cryptocompare.com/data/price?fsym={from_symbol}&tsyms={to_symbol} and subbing in the 3 letter symbol of the cryptocurrency (BTC for Bitcoin) for the from_symbol and the 3 letter symbol of the world currency (USD for US dollars) to the to_symbol. [Here's the link](https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD) for USD to BTC as an example. The trick here, of course will be converting the users request to the correct three letter symbol. Let's create a function which takes the event and returns the title for the response card and the message to be said and shown. This will use additional json dictionaries based on the cryptocurrencies and currencies the API supports.
+Our app can now respond nearly every type of response, except for the one we
+actually built the app for! This function will be taking the desired
+cryptocurrency, and if the user specified, the cryptocurrency and look up the
+price. Looking around http://cryptocompare.com/api it seems we can convert any
+cryptoprice to any world currency. This can be achieved by making a request to
+https://min-api.cryptocompare.com/data/price?fsym={from_symbol}&tsyms={to_symbol}
+and subbing in the 3 letter symbol of the cryptocurrency (BTC for Bitcoin) for
+the from_symbol and the 3 letter symbol of the world currency (USD for US
+dollars) to the to_symbol.
+[Here's the link](https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD)
+for USD to BTC as an example. The trick here, of course will be converting the
+users request to the correct three letter symbol. Let's create a function which
+takes the event and returns the title for the response card and the message to
+be said and shown. This will use additional json dictionaries based on the
+cryptocurrencies and currencies the API supports.
 
 *Handling the Cryptocurrency Logic*
 
@@ -228,7 +277,12 @@ def collect_crypto_price(event):
     return title, response_message
 ```
 
-The above example sufficient in taking a crypto currency and world currency and making a get request through the cryptocompare API to gather the current conversion rate of the two currencies. This should be enough for the extent of this tutorial, giving us a working Lambda function which can return the price of a cryptocurrency when given the name of the cryptocurrency and the world currency. The final file can be seen below.
+The above example sufficient in taking a crypto currency and world currency and
+making a get request through the cryptocompare API to gather the current
+conversion rate of the two currencies. This should be enough for the extent of
+this tutorial, giving us a working Lambda function which can return the price
+of a cryptocurrency when given the name of the cryptocurrency and the world
+currency. The final file can be seen below.
 
 *Final Lambda Function File*
 
@@ -326,10 +380,18 @@ def collect_crypto_price(event):
 
 ## Final Thoughts
 
-You can see the full source code on github [here](https://github.com/CraigLangford/Crypto-Price) and see that there has been logic added to the collect_crypto_price function. This is to handle the following edge cases:
+You can see the full source code on github
+[here](https://github.com/CraigLangford/Crypto-Price) and see that there has
+been logic added to the collect_crypto_price function. This is to handle the
+following edge cases:
 
-* When the world currency isn't supplied - the app defaults to the country where the user is
+* When the world currency isn't supplied - the app defaults to the country
+  where the user is
 * When a 3 letter name is specified
-* If the Alexa Skill Kit app sends a typo - Python's native difflib.get_close_matches is used to guess the nearest match for the user
+* If the Alexa Skill Kit app sends a typo - Python's native
+  difflib.get_close_matches is used to guess the nearest match for the user
 
-That's it! You now have a working Lambda function that you can pair with your Alexa Skills Kit application. See [deployment](https://github.com/CraigLangford/Crypto-Price#deployment) for how to upload your function to AWS and to actually use it!
+That's it! You now have a working Lambda function that you can pair with your
+Alexa Skills Kit application. See
+[deployment](https://github.com/CraigLangford/Crypto-Price#deployment) for how
+to upload your function to AWS and to actually use it!

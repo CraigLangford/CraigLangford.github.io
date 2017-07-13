@@ -1,6 +1,6 @@
 # main text of home
 name: Craig Langford
-bio: An backend developer who enjoys cooking, travelling and music
+bio: A backend developer who enjoys cooking, travelling and music
 # twitter summary info
 description: A blog about technology and stuff related
 
@@ -53,14 +53,15 @@ email: craigllangford@gmail.com
 authors:
     craiglangford:
         name: Craig Langford
-        bio: A backend developer who loves music and travelling
+        bio: A backend developer who enjoys cooking, travelling and music
+
         external-image: false
         picture: assets/images/profile.jpg
 
 # do you want a larger site? change the option below
 # options: [normal, large] | default: normal
 # normal = 560px / large = 810px
-width: normal
+width: large
 
 # if you don't need pagination, comment the *paginate* configs below
 # paginate: 5

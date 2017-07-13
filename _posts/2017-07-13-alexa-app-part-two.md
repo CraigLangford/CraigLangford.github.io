@@ -49,7 +49,7 @@ response from the documentation.
         "card": {
             "type": "Simple",
             "title": "Title in App",
-            "content": "This will be the message in the app.",
+            "content": "This will be the message in the app."
         },
         "outputSpeech": {
             "type": "PlainText",

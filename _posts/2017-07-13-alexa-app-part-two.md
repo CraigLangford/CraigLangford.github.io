@@ -138,7 +138,7 @@ documentation it looks something like below.
             "name": "GetCryptoPriceIntent",
             "slots": {
                 "Currency": {
-                    "name": "Currency"
+                    "name": "Currency",
                     "value": "US dollars"
                 },
                 "cryptocurrency": {

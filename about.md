@@ -16,8 +16,7 @@ To keep up with new technologies, I love working on side projects to explore
 new technologies. This has resulted in the creation of Puzzle Spin (Android
 and Web), Balloon Bird (Android), Crypto-Price (Amazon Echo) and more. If
 you're looking for help for your open source projects let me know and I'd be
-happy to help! Also, I am also a frequenter of VimGolf and am always up for a
-round.
+happy to help! Also, I am a frequenter of VimGolf and am always up for a round.
 
 ## Skills
 
